@@ -9,7 +9,7 @@ let nomeUsuarioSendoEditado = null;
 // FUNÇÃO: BUSCAR E DESENHAR OS USUÁRIOS (GET)
 function carregarUsuarios() {
     // Faz uma requisição GET para o backend pedindo a lista de usuários atualizada
-    fetch('http://localhost:3000/usuarios')
+    fetch('https://projeto-backend-icf3.onrender.com/usuarios')
         .then(function (resposta) {
             // Transforma a resposta de texto JSON vinda do servidor em um array JavaScript utilizável
             return resposta.json();
@@ -55,7 +55,7 @@ formulario.addEventListener('submit', function (evento) {
     if (nomeUsuarioSendoEditado !== null) {
         // MODO EDIÇÃO (PUT): O usuário clicou previamente em editar
         // encodeURIComponent garante que nomes com espaços ou caracteres especiais não quebrem o endereço da URL
-        fetch(`http://localhost:3000/usuarios/${(nomeUsuarioSendoEditado)}`, {
+        fetch(`https://projeto-backend-icf3.onrender.com/usuarios/${encodeURIComponent(nomeUsuarioSendoEditado)}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dadosUsuario)
@@ -72,7 +72,7 @@ formulario.addEventListener('submit', function (evento) {
     }
     else {
         // MODO CRIAÇÃO (POST): Fluxo normal de cadastro de um novo registro
-        fetch('http://localhost:3000/usuarios', {
+        fetch('https://projeto-backend-icf3.onrender.com/usuarios', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dadosUsuario)
@@ -106,7 +106,7 @@ function prepararEdicao(nome, cargo) {
 function deletarUsuario(nome) {
     // Exibe uma caixa de confirmação nativa do navegador para evitar exclusões acidentais
     if (confirm(`Tem certeza que deseja excluir ${nome}?`)) {
-        fetch(`http://localhost:3000/usuarios/${encodeURIComponent(nome)}`, {
+        fetch(`https://projeto-backend-icf3.onrender.com/usuarios/${encodeURIComponent(nome)}`, {
             method: 'DELETE'
         })
             .then(function () {
